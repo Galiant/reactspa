@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import Home from "./Home";
 
-import "bootstrap/dist/css/bootstrap.css";
-
 function App() {
-  return <Home />;
+  const [user, setUser] = useState("Ray");
+  return <Home user={user} onChange={(event) => setUser(event.target.value)} />;
 }
 
 export default App;
