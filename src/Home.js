@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "@reach/router";
 
 const Home = ({ user }) => {
   return (
@@ -17,18 +18,18 @@ const Home = ({ user }) => {
           </p>
           {!user && (
             <span>
-              <a href="/register" className="btn btn-outline-primary mr-2">
+              <Link to="/register" className="btn btn-outline-primary mr-2">
                 Register
-              </a>
-              <a href="/login" className="btn btn-outline-primary mr-2">
+              </Link>
+              <Link to="/login" className="btn btn-outline-primary mr-2">
                 Log In
-              </a>
+              </Link>
             </span>
           )}
           {user && (
-            <a href="/meetings" className="btn btn-primary">
+            <Link to="/meetings" className="btn btn-primary">
               Meetings
-            </a>
+            </Link>
           )}
         </div>
       </div>
