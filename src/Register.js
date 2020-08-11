@@ -1,15 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import FormError from "./FormError";
 
 const Register = () => {
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
-  // const [errorMessage, setErrorMesage] = useState(null);
+  const [errorMessage, setErrorMesage] = useState(null);
 
   const handleChange = (event, setItem) => {
     return setItem(event.target.value);
   };
+
+  useEffect(() => {
+    if (password !== repeatPassword) {
+      setErrorMesage("Passwords do not match!");
+    } else {
+      setErrorMesage(null);
+    }
+  }, [password, repeatPassword]);
 
   return (
     <form className="mt-3">
@@ -20,6 +29,7 @@ const Register = () => {
               <div className="card-body">
                 <h3 className="font-weight-light mb-3">Register</h3>
                 <div className="form-row">
+                  {errorMessage && <FormError theMessage={errorMessage} />}
                   <section className="col-sm-12 form-group">
                     <label
                       className="form-control-label sr-only"
