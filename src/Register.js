@@ -5,6 +5,11 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+  // const [errorMessage, setErrorMesage] = useState(null);
+
+  const handleChange = (event, setItem) => {
+    return setItem(event.target.value);
+  };
 
   return (
     <form className="mt-3">
@@ -30,7 +35,7 @@ const Register = () => {
                       name="displayName"
                       required
                       value={displayName}
-                      onChange={(e) => setDisplayName(e.target.value)}
+                      onChange={(e) => handleChange(e, setDisplayName)}
                     />
                   </section>
                 </div>
@@ -46,7 +51,7 @@ const Register = () => {
                     required
                     name="email"
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => handleChange(e, setEmail)}
                   />
                 </section>
                 <div className="form-row">
@@ -57,7 +62,7 @@ const Register = () => {
                       name="password"
                       placeholder="Password"
                       value={password}
-                      onChange={(e) => setPassword(e.target.value)}
+                      onChange={(e) => handleChange(e, setPassword)}
                     />
                   </section>
                   <section className="col-sm-6 form-group">
@@ -68,7 +73,7 @@ const Register = () => {
                       name="repeatPassword"
                       placeholder="Repeat Password"
                       value={repeatPassword}
-                      onChange={(e) => setRepeatPassword(e.target.value)}
+                      onChange={(e) => handleChange(e, setRepeatPassword)}
                     />
                   </section>
                 </div>
