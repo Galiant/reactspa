@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import firebase from "./Firebase";
 import FormError from "./FormError";
 
 const Register = () => {
@@ -8,10 +9,6 @@ const Register = () => {
   const [repeatPassword, setRepeatPassword] = useState("");
   const [errorMessage, setErrorMesage] = useState(null);
 
-  const handleChange = (event, setItem) => {
-    return setItem(event.target.value);
-  };
-
   useEffect(() => {
     if (password !== repeatPassword) {
       setErrorMesage("Passwords do not match!");
@@ -20,8 +17,35 @@ const Register = () => {
     }
   }, [password, repeatPassword]);
 
+  const handleChange = (event, setItem) => {
+    return setItem(event.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    const registrationInfo = {
+      displayName,
+      email,
+      password,
+    };
+    e.preventDefault();
+
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(
+        registrationInfo.email,
+        registrationInfo.password
+      )
+      .catch((error) => {
+        if (error.message !== null) {
+          setErrorMesage(error.message);
+        } else {
+          setErrorMesage(null);
+        }
+      });
+  };
+
   return (
-    <form className="mt-3">
+    <form className="mt-3" onSubmit={handleSubmit}>
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-lg-8">
