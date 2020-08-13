@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import firebase from "./Firebase";
 import FormError from "./FormError";
 
-const Register = () => {
+const Register = ({ registerUser }) => {
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -35,6 +36,9 @@ const Register = () => {
         registrationInfo.email,
         registrationInfo.password
       )
+      .then(() => {
+        registerUser(registrationInfo.displayName);
+      })
       .catch((error) => {
         if (error.message !== null) {
           setErrorMesage(error.message);
@@ -123,6 +127,10 @@ const Register = () => {
       </div>
     </form>
   );
+};
+
+Register.propTypes = {
+  registerUser: PropTypes.string,
 };
 
 export default Register;
