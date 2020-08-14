@@ -14,22 +14,23 @@ function App() {
   const [userID, setUserID] = useState(null);
 
   useEffect(() => {
-    const ref = firebase.database().ref("user");
-
-    ref.on("value", (snapshot) => {
-      let FbUser = snapshot.val();
-      setUser(FbUser);
+    firebase.auth().onAuthStateChanged(FbUser => {
+      if (FbUser) {
+        setUser(FbUser);
+        setDisplayName(FbUser.displayName);
+        setUserID(FbUser.uid);
+      }
     });
   }, [user]);
 
-  const registerUser = (userName) => {
-    firebase.auth().onAuthStateChanged((FbUser) => {
+  const registerUser = userName => {
+    firebase.auth().onAuthStateChanged(FbUser => {
       FbUser.updateProfile({
         displayName: userName,
       }).then(() => {
         setUser(FbUser);
         setDisplayName(FbUser.displayName);
-        setUserID({ userID: FbUser.uid });
+        setUserID(FbUser.uid);
       });
       navigate("/meetings");
     });
@@ -38,7 +39,7 @@ function App() {
   return (
     <div>
       <Navigation user={user} />
-      {user && <Welcome user={displayName} />}
+      {user && <Welcome userName={displayName} />}
       <Router>
         <Home path="/" user={user} />
         <Login path="/login" />
