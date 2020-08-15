@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { FaUsers } from "react-icons/fa";
 import { Link } from "@reach/router";
 
-const Navigation = ({ user }) => {
+const Navigation = ({ user, logoutUser }) => {
   return (
     <nav className="site-nav family-sans navbar navbar-expand bg-primary navbar-dark higher">
       <div className="container-fluid">
@@ -27,7 +27,11 @@ const Navigation = ({ user }) => {
             </Link>
           )}
           {user && (
-            <Link className="nav-item nav-link" to="/login">
+            <Link
+              className="nav-item nav-link"
+              to="/login"
+              onClick={e => logoutUser(e)}
+            >
               Log Out
             </Link>
           )}
@@ -39,6 +43,7 @@ const Navigation = ({ user }) => {
 
 Navigation.propTypes = {
   user: PropTypes.string,
+  logoutUser: PropTypes.func,
 };
 
 export default Navigation;

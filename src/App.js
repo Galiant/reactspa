@@ -36,10 +36,24 @@ function App() {
     });
   };
 
+  const logoutUser = e => {
+    e.preventDefault();
+    setUser(null);
+    setDisplayName(null);
+    setUserID(null);
+
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        navigate("/login");
+      });
+  };
+
   return (
     <div>
-      <Navigation user={user} />
-      {user && <Welcome userName={displayName} />}
+      <Navigation user={user} logoutUser={logoutUser} />
+      {user && <Welcome userName={displayName} logoutUser={logoutUser} />}
       <Router>
         <Home path="/" user={user} />
         <Login path="/login" />
