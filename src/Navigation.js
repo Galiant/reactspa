@@ -42,7 +42,7 @@ const Navigation = ({ user, logoutUser }) => {
 };
 
 Navigation.propTypes = {
-  user: PropTypes.string,
+  user: PropTypes.object,
   logoutUser: PropTypes.func,
 };
 

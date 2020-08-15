@@ -22,7 +22,7 @@ const Register = ({ registerUser }) => {
     return setItem(event.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     const registrationInfo = {
       displayName,
       email,
@@ -39,7 +39,7 @@ const Register = ({ registerUser }) => {
       .then(() => {
         registerUser(registrationInfo.displayName);
       })
-      .catch((error) => {
+      .catch(error => {
         if (error.message !== null) {
           setErrorMesage(error.message);
         } else {
@@ -73,7 +73,7 @@ const Register = ({ registerUser }) => {
                       name="displayName"
                       required
                       value={displayName}
-                      onChange={(e) => handleChange(e, setDisplayName)}
+                      onChange={e => handleChange(e, setDisplayName)}
                     />
                   </section>
                 </div>
@@ -89,7 +89,7 @@ const Register = ({ registerUser }) => {
                     required
                     name="email"
                     value={email}
-                    onChange={(e) => handleChange(e, setEmail)}
+                    onChange={e => handleChange(e, setEmail)}
                   />
                 </section>
                 <div className="form-row">
@@ -100,7 +100,7 @@ const Register = ({ registerUser }) => {
                       name="password"
                       placeholder="Password"
                       value={password}
-                      onChange={(e) => handleChange(e, setPassword)}
+                      onChange={e => handleChange(e, setPassword)}
                     />
                   </section>
                   <section className="col-sm-6 form-group">
@@ -111,7 +111,7 @@ const Register = ({ registerUser }) => {
                       name="repeatPassword"
                       placeholder="Repeat Password"
                       value={repeatPassword}
-                      onChange={(e) => handleChange(e, setRepeatPassword)}
+                      onChange={e => handleChange(e, setRepeatPassword)}
                     />
                   </section>
                 </div>
@@ -130,7 +130,7 @@ const Register = ({ registerUser }) => {
 };
 
 Register.propTypes = {
-  registerUser: PropTypes.string,
+  registerUser: PropTypes.func,
 };
 
 export default Register;
