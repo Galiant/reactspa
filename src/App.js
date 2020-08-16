@@ -50,6 +50,12 @@ function App() {
       });
   };
 
+  const addMeeting = meetingName => {
+    const ref = firebase.database().ref(`meetings/${user.uid}`);
+
+    ref.push({ meetingName: meetingName });
+  };
+
   return (
     <div>
       <Navigation user={user} logoutUser={logoutUser} />
@@ -57,7 +63,7 @@ function App() {
       <Router>
         <Home path="/" user={user} />
         <Login path="/login" />
-        <Meetings path="/meetings" />
+        <Meetings path="/meetings" addMeeting={addMeeting} />
         <Register path="/register" registerUser={registerUser} />
       </Router>
     </div>

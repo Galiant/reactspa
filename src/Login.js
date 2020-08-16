@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
+import React, { useState } from "react";
 import firebase from "./Firebase";
 import FormError from "./FormError";
 import { navigate } from "@reach/router";
@@ -85,10 +84,6 @@ const Login = () => {
       </div>
     </form>
   );
-};
-
-Login.propTypes = {
-  user: PropTypes.string,
 };
 
 export default Login;
