@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, setState } from "react";
 import { Router, navigate } from "@reach/router";
 import firebase from "./Firebase";
 import Navigation from "./Navigation";
@@ -12,6 +12,8 @@ function App() {
   const [user, setUser] = useState(null);
   const [displayName, setDisplayName] = useState(null);
   const [userID, setUserID] = useState(null);
+  const [meetings, setMeetings] = useState(null);
+  const [howManyMeetings, setHowManyMeetings] = useState(null);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(FbUser => {
@@ -19,6 +21,25 @@ function App() {
         setUser(FbUser);
         setDisplayName(FbUser.displayName);
         setUserID(FbUser.uid);
+
+        const meetingsRef = firebase.database().ref(`meetings/${FbUser.uid}`);
+
+        meetingsRef.on("value", snapshot => {
+          let meetings = snapshot.val();
+          let meetingsList = [];
+
+          for (let item in meetings) {
+            meetingsList.push({
+              meetingId: item,
+              meetingName: meetings[item].meetingName,
+            });
+          }
+
+          setMeetings({ meetings: meetingsList });
+          setHowManyMeetings({ howmanyMeetings: meetingsList.length });
+        });
+      } else {
+        setUser(null);
       }
     });
   }, [user]);
