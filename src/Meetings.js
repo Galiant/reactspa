@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import MeetingList from "./MeetingList";
 
-const Meetings = ({ addMeeting }) => {
+const Meetings = ({ addMeeting, meetings }) => {
   const [meetingName, setMeetingName] = useState("");
 
   const handleChange = (event, setItem) => {
@@ -46,6 +47,23 @@ const Meetings = ({ addMeeting }) => {
             </div>
           </div>
         </div>
+        <div className="col-11 col-md-6 text-center">
+          <div className="card border-top-0 rounded-0">
+            {meetings && meetings.lenght ? (
+              <div className="card-body py-2">
+                <h4 className="card-title font-weight-light m-0">
+                  Your Meetings
+                </h4>
+              </div>
+            ) : null}
+
+            {/* {meetings && (
+              <div className="list-group list-group-flush">
+                <MeetingList meetings={meetings} />
+              </div>
+            )} */}
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -53,6 +71,7 @@ const Meetings = ({ addMeeting }) => {
 
 Meetings.propTypes = {
   addMeeting: PropTypes.string,
+  meetings: PropTypes.object,
 };
 
 export default Meetings;

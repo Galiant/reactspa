@@ -84,7 +84,11 @@ function App() {
       <Router>
         <Home path="/" user={user} />
         <Login path="/login" />
-        <Meetings path="/meetings" addMeeting={addMeeting} />
+        <Meetings
+          path="/meetings"
+          meetings={meetings}
+          addMeeting={addMeeting}
+        />
         <Register path="/register" registerUser={registerUser} />
       </Router>
     </div>
