@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const MeetingList = ({ meetings }) => {
   const myMeetings = meetings.map(item => {
     return (
-      <div className="list-group-item d-flex" key={item.meetingID}>
+      <div className="list-group-item d-flex" key={item.meetingId}>
         <section className="pl-3 text-left align-self-center">
           {item.meetingName}
         </section>
@@ -16,7 +16,7 @@ const MeetingList = ({ meetings }) => {
 };
 
 MeetingList.propTypes = {
-  meetings: PropTypes.object,
+  meetings: PropTypes.array,
 };
 
 export default MeetingList;

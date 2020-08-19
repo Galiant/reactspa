@@ -1,4 +1,4 @@
-import React, { useState, useEffect, setState } from "react";
+import React, { useState, useEffect } from "react";
 import { Router, navigate } from "@reach/router";
 import firebase from "./Firebase";
 import Navigation from "./Navigation";
@@ -35,7 +35,7 @@ function App() {
             });
           }
 
-          setMeetings({ meetings: meetingsList });
+          setMeetings(meetingsList);
           setHowManyMeetings({ howmanyMeetings: meetingsList.length });
         });
       } else {
@@ -77,6 +77,8 @@ function App() {
     ref.push({ meetingName: meetingName });
   };
 
+  console.log(`MEETINGS: ${meetings}`);
+
   return (
     <div>
       <Navigation user={user} logoutUser={logoutUser} />
@@ -84,12 +86,14 @@ function App() {
       <Router>
         <Home path="/" user={user} />
         <Login path="/login" />
-        <Meetings
-          path="/meetings"
-          meetings={meetings}
-          addMeeting={addMeeting}
-        />
         <Register path="/register" registerUser={registerUser} />
+        {meetings && (
+          <Meetings
+            path="/meetings"
+            meetings={meetings}
+            addMeeting={addMeeting}
+          />
+        )}
       </Router>
     </div>
   );
