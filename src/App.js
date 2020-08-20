@@ -92,6 +92,7 @@ function App() {
             path="/meetings"
             meetings={meetings}
             addMeeting={addMeeting}
+            userID={userID}
           />
         )}
       </Router>

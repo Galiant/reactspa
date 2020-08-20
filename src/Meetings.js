@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import MeetingList from "./MeetingList";
 
-const Meetings = ({ addMeeting, meetings }) => {
+const Meetings = ({ addMeeting, meetings, userID }) => {
   const [meetingName, setMeetingName] = useState("");
 
   const handleChange = (event, setItem) => {
@@ -59,7 +59,7 @@ const Meetings = ({ addMeeting, meetings }) => {
 
             {meetings && (
               <div className="list-group list-group-flush">
-                <MeetingList meetings={meetings} />
+                <MeetingList meetings={meetings} userID={userID} />
               </div>
             )}
           </div>
