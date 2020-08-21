@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import firebase from "./Firebase";
 import { GoTrashcan } from "react-icons/go";
+import { FaLink } from "react-icons/fa";
+import { navigate } from "@reach/router";
 
 const MeetingList = ({ meetings, userID }) => {
   const deleteMeeting = (e, whichMeeting) => {
@@ -15,7 +17,7 @@ const MeetingList = ({ meetings, userID }) => {
   const myMeetings = meetings.map(item => {
     return (
       <div className="list-group-item d-flex" key={item.meetingId}>
-        <ssection
+        <section
           className="btn-group align-self-center"
           role="group"
           aria-label="Meeting Options"
@@ -27,7 +29,14 @@ const MeetingList = ({ meetings, userID }) => {
           >
             <GoTrashcan />
           </button>
-        </ssection>
+          <button
+            className="btn btn-sm btn-outline-secondary"
+            title="Check In"
+            onClick={() => navigate(`/checkin/${userID}/${item.meetingId}`)}
+          >
+            <FaLink />
+          </button>
+        </section>
 
         <section className="pl-3 text-left align-self-center">
           {item.meetingName}
