@@ -7,6 +7,7 @@ import Home from "./Home";
 import Login from "./Login";
 import Register from "./Register";
 import Meetings from "./Meetings";
+import Checkin from "./Checkin";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -87,14 +88,13 @@ function App() {
         <Home path="/" user={user} />
         <Login path="/login" />
         <Register path="/register" registerUser={registerUser} />
-        {meetings && (
-          <Meetings
-            path="/meetings"
-            meetings={meetings}
-            addMeeting={addMeeting}
-            userID={userID}
-          />
-        )}
+        <Meetings
+          path="/meetings"
+          meetings={meetings}
+          addMeeting={addMeeting}
+          userID={userID}
+        />
+        <Checkin path="/checkin/:userID/:meetingId" />
       </Router>
     </div>
   );
