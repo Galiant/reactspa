@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import firebase from "./Firebase";
-import PropTypes from "prop-types";
 import { navigate } from "@reach/router";
 
 const Checkin = ({ userID, meetingId }) => {

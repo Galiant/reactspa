@@ -8,6 +8,7 @@ import Login from "./Login";
 import Register from "./Register";
 import Meetings from "./Meetings";
 import Checkin from "./Checkin";
+import Attendees from "./Attendees";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -94,6 +95,7 @@ function App() {
           addMeeting={addMeeting}
           userID={userID}
         />
+        <Attendees path="/attendees/:userID/:meetingId" adminUsers={userID} />
         <Checkin path="/checkin/:userID/:meetingId" />
       </Router>
     </div>
