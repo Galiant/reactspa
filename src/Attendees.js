@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
 import firebase from "./Firebase";
+import AttendeesList from "./AttendeesList";
 
 const Attendees = ({ userID, meetingId }) => {
   const [displayAttendees, setDisplayAttendees] = useState([]);
 
   useEffect(() => {
-    const ref = firebase
+    const attendeesRef = firebase
       .database()
       .ref(`meetings/${userID}/${meetingId}/attendees`);
 
-    ref.on("value", snapshot => {
+    attendeesRef.on("value", snapshot => {
       let attendees = snapshot.val();
       let attendeesList = [];
+
       for (let item in attendees) {
         attendees.push({
           attendeeID: item,
@@ -30,7 +32,7 @@ const Attendees = ({ userID, meetingId }) => {
           <h1 className="font-weight-light text-center">Attendees</h1>
         </div>
       </div>
-      List Goes Here
+      <AttendeesList userID={userID} attendees={displayAttendees} />
     </div>
   );
 };
