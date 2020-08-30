@@ -79,8 +79,6 @@ function App() {
     ref.push({ meetingName: meetingName });
   };
 
-  console.log(`MEETINGS: ${meetings}`);
-
   return (
     <div>
       <Navigation user={user} logoutUser={logoutUser} />

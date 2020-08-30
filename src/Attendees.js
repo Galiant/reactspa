@@ -15,7 +15,7 @@ const Attendees = ({ userID, meetingId }) => {
       let attendeesList = [];
 
       for (let item in attendees) {
-        attendees.push({
+        attendeesList.push({
           attendeeID: item,
           attendeeName: attendees[item].attendeeName,
           attendeeEmail: attendees[item].attendeeEmail,
