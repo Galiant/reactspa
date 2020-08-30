@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import firebase from "./Firebase";
 import AttendeesList from "./AttendeesList";
 
-const Attendees = ({ userID, meetingId }) => {
+const Attendees = ({ userID, meetingId, adminUser }) => {
   const [displayAttendees, setDisplayAttendees] = useState([]);
 
   useEffect(() => {
@@ -16,7 +16,7 @@ const Attendees = ({ userID, meetingId }) => {
 
       for (let item in attendees) {
         attendeesList.push({
-          attendeeID: item,
+          attendeeId: item,
           attendeeName: attendees[item].attendeeName,
           attendeeEmail: attendees[item].attendeeEmail,
         });
@@ -32,7 +32,12 @@ const Attendees = ({ userID, meetingId }) => {
           <h1 className="font-weight-light text-center">Attendees</h1>
         </div>
       </div>
-      <AttendeesList userID={userID} attendees={displayAttendees} />
+      <AttendeesList
+        userID={userID}
+        attendees={displayAttendees}
+        adminUser={adminUser}
+        meetingId={meetingId}
+      />
     </div>
   );
 };

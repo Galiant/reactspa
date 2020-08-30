@@ -93,7 +93,7 @@ function App() {
           addMeeting={addMeeting}
           userID={userID}
         />
-        <Attendees path="/attendees/:userID/:meetingId" adminUsers={userID} />
+        <Attendees path="/attendees/:userID/:meetingId" adminUser={userID} />
         <Checkin path="/checkin/:userID/:meetingId" />
       </Router>
     </div>
