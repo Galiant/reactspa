@@ -1,9 +1,20 @@
 import React from "react";
 import PropTypes from "prop-types";
+import firebase from "./Firebase";
 import { GoTrashcan } from "react-icons/go";
 
 const AttendeesList = ({ attendees, adminUser, userID, meetingId }) => {
   const admin = adminUser === userID ? true : false;
+
+  const deleteAttendee = (e, whichhMeeting, whichAttendee) => {
+    e.preventDefault();
+
+    const ref = firebase
+      .database()
+      .ref(`meetings/${adminUser}/${whichhMeeting}/attendees/${whichAttendee}`);
+    ref.remove();
+  };
+
   const myAttendees = attendees.map(item => {
     return (
       <div
@@ -22,7 +33,7 @@ const AttendeesList = ({ attendees, adminUser, userID, meetingId }) => {
                 <button
                   className="btn btn-sm btn-outline-secondary"
                   title="Delete Attendee"
-                  //   onClick={e => deleteAttendee(e, meetingId, item.attendeeId)}
+                  onClick={e => deleteAttendee(e, meetingId, item.attendeeId)}
                 >
                   <GoTrashcan />
                 </button>
