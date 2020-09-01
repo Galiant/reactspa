@@ -72,6 +72,7 @@ const Meetings = ({ addMeeting, meetings, userID }) => {
 Meetings.propTypes = {
   addMeeting: PropTypes.func,
   meetings: PropTypes.array,
+  userID: PropTypes.string,
 };
 
 export default Meetings;

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import firebase from "./Firebase";
-import { GoTrashcan } from "react-icons/go";
+import { GoTrashcan, GoStar } from "react-icons/go";
 
 const AttendeesList = ({ attendees, adminUser, userID, meetingId }) => {
   const admin = adminUser === userID ? true : false;
@@ -13,6 +13,22 @@ const AttendeesList = ({ attendees, adminUser, userID, meetingId }) => {
       .database()
       .ref(`meetings/${adminUser}/${whichhMeeting}/attendees/${whichAttendee}`);
     ref.remove();
+  };
+
+  const toggleStar = (e, star, whichhMeeting, whichAttendee) => {
+    e.preventDefault();
+
+    const ref = firebase
+      .database()
+      .ref(
+        `meetings/${adminUser}/${whichhMeeting}/attendees/${whichAttendee}/star`
+      );
+
+    if (star === undefined) {
+      ref.set(true);
+    } else {
+      ref.set(!star);
+    }
   };
 
   const myAttendees = attendees.map(item => {
@@ -30,6 +46,18 @@ const AttendeesList = ({ attendees, adminUser, userID, meetingId }) => {
           >
             {admin && (
               <div className="btn-group pr-2">
+                <button
+                  className={
+                    "btn btn-sm " +
+                    (item.star ? "btn-info" : "btn-outline-secondary")
+                  }
+                  title="Give user a star"
+                  onClick={e =>
+                    toggleStar(e, item.star, meetingId, item.attendeeId)
+                  }
+                >
+                  <GoStar />
+                </button>
                 <button
                   className="btn btn-sm btn-outline-secondary"
                   title="Delete Attendee"

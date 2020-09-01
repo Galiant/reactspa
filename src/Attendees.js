@@ -19,6 +19,7 @@ const Attendees = ({ userID, meetingId, adminUser }) => {
           attendeeId: item,
           attendeeName: attendees[item].attendeeName,
           attendeeEmail: attendees[item].attendeeEmail,
+          star: attendees[item].star,
         });
       }
       setDisplayAttendees(attendeesList);

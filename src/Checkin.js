@@ -20,6 +20,7 @@ const Checkin = ({ userID, meetingId }) => {
     ref.push({
       attendeeName: displayName,
       attendeeEmail: email,
+      star: false,
     });
     navigate(`/attendees/${userID}/${meetingId}`);
   };
