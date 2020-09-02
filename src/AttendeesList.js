@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import firebase from "./Firebase";
-import { GoTrashcan, GoStar } from "react-icons/go";
+import { GoTrashcan, GoStar, GoMail } from "react-icons/go";
 
 const AttendeesList = ({ attendees, adminUser, userID, meetingId }) => {
   const admin = adminUser === userID ? true : false;
@@ -58,6 +58,13 @@ const AttendeesList = ({ attendees, adminUser, userID, meetingId }) => {
                 >
                   <GoStar />
                 </button>
+                <a
+                  href={`mailto:${item.attendeeEmail}`}
+                  className="btn btn-sm btn-outline-secondary"
+                  title="Mail Attendee"
+                >
+                  <GoMail />
+                </a>
                 <button
                   className="btn btn-sm btn-outline-secondary"
                   title="Delete Attendee"
