@@ -4,6 +4,7 @@ import AttendeesList from "./AttendeesList";
 
 const Attendees = ({ userID, meetingId, adminUser }) => {
   const [displayAttendees, setDisplayAttendees] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const attendeesRef = firebase
@@ -26,16 +27,37 @@ const Attendees = ({ userID, meetingId, adminUser }) => {
     });
   }, [userID, meetingId]);
 
+  const handleChange = (event, setItem) => {
+    return setItem(event.target.value);
+  };
+
+  const dataFilter = item =>
+    item.attendeeName.toLowerCase().match(searchQuery.toLowerCase()) && true;
+
+  const filteredAttendees = displayAttendees.filter(dataFilter);
+
   return (
     <div className="container mt-4">
       <div className="row justify-content-center">
         <div className="col-md-8">
           <h1 className="font-weight-light text-center">Attendees</h1>
+          <div className="card bg-light mb-4">
+            <duv className="card-body text-center">
+              <input
+                type="text"
+                name="searchQuery"
+                value={searchQuery}
+                placeholder="Search Attendees"
+                className="form-control"
+                onChange={e => handleChange(e, setSearchQuery)}
+              />
+            </duv>
+          </div>
         </div>
       </div>
       <AttendeesList
         userID={userID}
-        attendees={displayAttendees}
+        attendees={filteredAttendees}
         adminUser={adminUser}
         meetingId={meetingId}
       />
