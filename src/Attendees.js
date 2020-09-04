@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import firebase from "./Firebase";
 import AttendeesList from "./AttendeesList";
+import { FaUndo } from "react-icons/fa";
 
 const Attendees = ({ userID, meetingId, adminUser }) => {
   const [displayAttendees, setDisplayAttendees] = useState([]);
@@ -27,6 +28,10 @@ const Attendees = ({ userID, meetingId, adminUser }) => {
     });
   }, [userID, meetingId]);
 
+  const handleQuery = () => {
+    return setSearchQuery("");
+  };
+
   const handleChange = (event, setItem) => {
     return setItem(event.target.value);
   };
@@ -42,16 +47,27 @@ const Attendees = ({ userID, meetingId, adminUser }) => {
         <div className="col-md-8">
           <h1 className="font-weight-light text-center">Attendees</h1>
           <div className="card bg-light mb-4">
-            <duv className="card-body text-center">
-              <input
-                type="text"
-                name="searchQuery"
-                value={searchQuery}
-                placeholder="Search Attendees"
-                className="form-control"
-                onChange={e => handleChange(e, setSearchQuery)}
-              />
-            </duv>
+            <div className="card-body text-center">
+              <div className="input-group input-group-lg">
+                <input
+                  type="text"
+                  name="searchQuery"
+                  value={searchQuery}
+                  placeholder="Search Attendees"
+                  className="form-control"
+                  onChange={e => handleChange(e, setSearchQuery)}
+                />
+                <div className="input-group-append">
+                  <button
+                    className="btn btn-sm btn-outline-info"
+                    title="Reset search"
+                    onClick={() => handleQuery()}
+                  >
+                    <FaUndo />
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
