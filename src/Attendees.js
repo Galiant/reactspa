@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import firebase from "./Firebase";
 import AttendeesList from "./AttendeesList";
-import { FaUndo } from "react-icons/fa";
+import { FaUndo, FaRandom } from "react-icons/fa";
 
 const Attendees = ({ userID, meetingId, adminUser }) => {
   const [displayAttendees, setDisplayAttendees] = useState([]);
+  const [allAttendees, setAllAttendees] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
@@ -25,15 +26,23 @@ const Attendees = ({ userID, meetingId, adminUser }) => {
         });
       }
       setDisplayAttendees(attendeesList);
+      setAllAttendees(attendeesList);
     });
   }, [userID, meetingId]);
 
-  const handleQuery = () => {
-    return setSearchQuery("");
-  };
-
   const handleChange = (event, setItem) => {
     return setItem(event.target.value);
+  };
+
+  const chooseRandom = () => {
+    const randomAttendee = Math.floor(Math.random() * allAttendees.length);
+    resetQuery();
+    setDisplayAttendees([allAttendees[randomAttendee]]);
+  };
+
+  const resetQuery = () => {
+    setSearchQuery("");
+    setDisplayAttendees(allAttendees);
   };
 
   const dataFilter = item =>
@@ -60,8 +69,15 @@ const Attendees = ({ userID, meetingId, adminUser }) => {
                 <div className="input-group-append">
                   <button
                     className="btn btn-sm btn-outline-info"
+                    title="Pick a random attendee"
+                    onClick={() => chooseRandom()}
+                  >
+                    <FaRandom />
+                  </button>
+                  <button
+                    className="btn btn-sm btn-outline-info"
                     title="Reset search"
-                    onClick={() => handleQuery()}
+                    onClick={() => resetQuery()}
                   >
                     <FaUndo />
                   </button>
